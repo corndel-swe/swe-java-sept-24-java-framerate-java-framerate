@@ -1,0 +1,9 @@
+<div class="container">
+    <h1>
+        Hello, world!
+    </h1>
+
+    <ul>
+        <li th:each="movie : ${movies}" th:text="${movie.title}"></li>
+    </ul>
+</div>
