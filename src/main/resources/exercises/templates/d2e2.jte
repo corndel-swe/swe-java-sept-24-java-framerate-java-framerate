@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 2 | Exercise 2</title>
+</head>
+
+<body>
+  <!--
+    TODO:
+    - Insert `success.jpg` from the public folder here
+    - Ensure the alt text says "Success Kid"
+  -->
+  <!--
+    TODO: REMOVE ANSWER
+  -->
+  <img src="/success.jpg" alt="Success Kid" width="150" />
+</body>
+
+</html>

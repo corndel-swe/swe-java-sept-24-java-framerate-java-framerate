@@ -1,0 +1,24 @@
+@import java.util.List
+@param List<String> shopping
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 1 | Exercise 3</title>
+</head>
+
+<body>
+  <h1>Shopping list</h1>
+
+  <ul>
+    <!-- TODO: loop through `shopping` and render each item inside a <li> element -->
+    @for(var item : shopping)
+      <li>${item}</li>
+    @endfor
+  </ul>
+</body>
+
+</html>
