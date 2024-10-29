@@ -1,9 +1,7 @@
 package com.corndel.framerate;
 
-import com.corndel.framerate.models.Movie;
-import com.corndel.framerate.models.Review;
-import com.corndel.framerate.repositories.MovieRepository;
-import com.corndel.framerate.repositories.ReviewRepository;
+import com.corndel.framerate.controllers.MovieController;
+
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
@@ -11,8 +9,6 @@ import io.javalin.Javalin;
 import io.javalin.http.staticfiles.Location;
 import io.javalin.rendering.template.JavalinThymeleaf;
 
-import java.util.List;
-import java.util.Map;
 
 public class App {
   public static void main(String[] args) {
@@ -23,7 +19,7 @@ public class App {
   public static Javalin createApp() {
     var app = Javalin.create(
         config -> {
-          config.staticFiles.add("/public", Location.CLASSPATH);
+          config.staticFiles.add("/exercises/public", Location.CLASSPATH);
 
           var resolver = new ClassLoaderTemplateResolver();
           resolver.setPrefix("/exercises/templates/");
@@ -36,18 +32,32 @@ public class App {
           config.fileRenderer(new JavalinThymeleaf(engine));
         });
 
-      app.get("/", ctx -> {
-          List<Movie> movies = MovieRepository.findAll();
-          ctx.render("movies.html", Map.of("movies", movies));
-      });
+      app.get("/", MovieController::getAllMovies);
+      app.get("/movies/{id}", MovieController::getMovieDetails);
 
-      app.get("/movies/{id}", ctx -> {
-          int id = Integer.parseInt(ctx.pathParam("id"));
-          Movie movie = MovieRepository.findById(id);
-          List<Review> reviews = ReviewRepository.findByMovie(id);
-          ctx.render("movie-reviews.html", Map.of("movie", movie, "reviews", reviews));
-      });
 
-    return app;
+
+
+
+
+      //      app.get("/d2e1", ctx -> {
+//          ctx.status(200).render("d2e1.html");
+//      });
+//      app.get("/d2e2", ctx -> {
+//          ctx.status(200).render("d2e2.html");
+//      });
+//      app.get("/d2e3", ctx -> {
+//          ctx.status(200).render("d2e3.html");
+//      });
+//
+//      app.post("/submit", ctx -> {
+//
+//          String name = ctx.formParam("name");
+//          String email = ctx.formParam("email");
+//
+//          ctx.result("Received: " + name + ", " + email);
+//      });
+
+      return app;
   }
 }

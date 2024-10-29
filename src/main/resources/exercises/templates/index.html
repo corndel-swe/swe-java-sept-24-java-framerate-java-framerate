@@ -8,7 +8,10 @@
 <body>
 <h1>Movies</h1>
 <ul>
-    <li th:each="movie : ${movies}" th:text="${movie.title}"></li>
+    <li th:each="movie : ${movies}">
+        <a th:href="@{/movies/{id}(id=${movie.id})}" th:text="${movie.title}"></a>
+    </li>
 </ul>
 </body>
 </html>
+

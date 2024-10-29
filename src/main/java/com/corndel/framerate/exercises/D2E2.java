@@ -24,15 +24,9 @@ public class D2E2 {
           config.fileRenderer(new JavalinThymeleaf(engine));
         });
 
-    app.get(
-        "/d2e2",
-        ctx -> {
-          // TODO: Render 'd2e2.html'
-          // (note, we have used setPrefix above so the path is relative to
-          // /exercises/templates/)
-
-          // TODO: Open d2e2.html and follow the instructions
-        });
+      app.get("/d2e2", ctx -> {
+          ctx.status(200).render("d2e2.html");
+      });
 
     return app;
   }

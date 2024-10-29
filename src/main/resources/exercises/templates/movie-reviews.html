@@ -3,15 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Movie Info</title>
+  <title th:text="${movie.title}">Movie Info</title>
 </head>
 <body>
 <h1 th:text="${movie.title}">Movie Title</h1>
 
+<div>
+  <p><strong>Release Date:</strong> <span th:text="${movie.releaseDate}">Release Date</span></p>
+  <p><strong>Age Rating:</strong> <span th:text="${movie.ageRating}">Age Rating</span></p>
+  <p><strong>Runtime:</strong> <span th:text="${movie.runtime}">Runtime</span> minutes</p>
+
+  <p><strong>Genres:</strong></p>
+  <ul>
+    <li th:each="genre : ${movie.genres}" th:text="${genre}"></li>
+  </ul>
+</div>
+
 <h2>Reviews</h2>
 <ul>
   <li th:each="review : ${reviews}">
-    <p th:text="${review.rating}">Review Rating</p>
+    <p><strong>Rating:</strong> <span th:text="${review.rating}">Review Rating</span></p>
   </li>
 </ul>
 
