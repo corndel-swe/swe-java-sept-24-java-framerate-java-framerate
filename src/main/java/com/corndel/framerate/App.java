@@ -1,12 +1,14 @@
 package com.corndel.framerate;
 
+import com.corndel.framerate.controllers.MovieController;
+
+import com.corndel.framerate.controllers.ReviewController;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 import io.javalin.Javalin;
 import io.javalin.http.staticfiles.Location;
 import io.javalin.rendering.template.JavalinThymeleaf;
-
 public class App {
   public static void main(String[] args) {
     var javalin = createApp();
@@ -19,7 +21,7 @@ public class App {
           config.staticFiles.add("/public", Location.CLASSPATH);
 
           var resolver = new ClassLoaderTemplateResolver();
-          resolver.setPrefix("/templates/");
+          resolver.setPrefix("/exercises/templates/");
           resolver.setSuffix(".html");
           resolver.setTemplateMode("HTML");
 
@@ -29,10 +31,11 @@ public class App {
           config.fileRenderer(new JavalinThymeleaf(engine));
         });
 
-    app.get("/", ctx -> {
-      ctx.result("Hello, World!");
-    });
+      app.get("/", MovieController::getAllMovies);
+      app.get("/movies/{id}", MovieController::getMovieDetails);
+      app.get("/review/{movieId}", ReviewController::showReviewForm);
+      app.post("/review/{movieId}", ReviewController::addReview);
 
-    return app;
+      return app;
   }
 }

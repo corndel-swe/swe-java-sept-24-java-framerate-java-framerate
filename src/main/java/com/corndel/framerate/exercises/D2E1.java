@@ -22,12 +22,9 @@ public class D2E1 {
           config.fileRenderer(new JavalinThymeleaf(engine));
         });
 
-    app.get(
-        "/d2e1",
-        ctx -> {
-          // TODO: Render 'd2e1.html'
-          // TODO: Open d2e1.html and follow the instructions
-        });
+      app.get("/d2e1", ctx -> {
+          ctx.status(200).render("d2e1.html");
+      });
 
     return app;
   }

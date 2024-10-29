@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie List</title>
+    <style>
+        .movie-card {
+            border: 1px solid #953535;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .movie-image {
+            width: 100px;
+            height: auto;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>Movies</h1>
+<ul>
+    <li th:each="movie : ${movies}" class="movie-card">
+        <img th:src="${movie.imageURL}" alt="Movie Image" class="movie-image"/>
+        <div>
+            <h2>
+                <a th:href="@{/movies/{id}(id=${movie.id})}" th:text="${movie.title}"></a>
+            </h2>
+            <p>Release Date: <span th:text="${movie.releaseDate}"></span></p>
+            <p>Age Rating: <span th:text="${movie.ageRating}"></span></p>
+            <p>Genres: <span th:each="genre : ${movie.genres}" th:text="${genre} + ', '"></span></p>
+            <p>Runtime: <span th:text="${movie.runtime} + ' minutes'"></span></p>
+        </div>
+    </li>
+</ul>
+</body>
+</html>
+
+
