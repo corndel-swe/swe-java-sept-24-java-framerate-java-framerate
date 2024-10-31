@@ -1,9 +1,23 @@
-<div class="container">
-    <h1>
-        Hello, world!
-    </h1>
-
-    <ul>
-        <li th:text="${movie.title}"></li>
-    </ul>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${movie.title}"></title>
+</head>
+<body>
+<h1 th:text="${movie.title}"></h1>
+<div>
+    <img th:src="@{${movie.imageURL}}" alt="Movie Poster"/>
 </div>
+<section>
+    <h2 th:text="${movie.title}">Movie Title</h2>
+    <p>Release Date: <span th:text="${movie.releaseDate}">Release Date</span></p>
+    <p>Age Rating: <span th:text="${movie.ageRating}">Age Rating</span></p>
+    <p>Runtime: <span th:text="${movie.runtime}">Runtime</span> minutes</p>
+    <p>Genres:
+    <ul>
+        <li th:each="genre : ${movie.genres}" th:text="${genre}">Genre</li>
+    </ul>
+    </p>
+</section>
+</body>
+</html>
