@@ -26,9 +26,9 @@ sure you have a go if you get through the main tasks!
 
 > [!NOTE]
 >
-> This will require you to add a new method to the `Movie` model which adds a
-> review to the `reviews` table, as well as new endpoints in `app.js` and a form
-> for the user in `views`
+> This will require you to add a new method to the `ReviewRepository` model which adds a
+> review to the `reviews` table, as well as new endpoints in `App.java` and a form
+> for the user in `templates`
 
 ## Extensions
 

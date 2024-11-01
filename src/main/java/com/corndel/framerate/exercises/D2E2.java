@@ -32,6 +32,7 @@ public class D2E2 {
           // /exercises/templates/)
 
           // TODO: Open d2e2.html and follow the instructions
+            ctx.render("d2e2.html");
         });
 
     return app;

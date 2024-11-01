@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="eng">
+  <head>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/css/index.css" />
+    <title th:text="${movie.getTitle()}"></title>
+  </head>
+
+  <body>
+    <div th:replace="fragments/navbar :: navbar"></div>
+
+    <main class="view-movie">
+      <section class="movie-info">
+        <img
+          class="movie-info__img"
+          th:src="@{${movie.getImageURL()}}"
+          th:alt="${movie.getTitle()}"
+        />
+        <h1
+          class="heading movie-info__heading"
+          th:text="${movie.getTitle()}"
+        ></h1>
+        <p class="text">
+          Release Date:
+          <span class="text-bold" th:text="${movie.getReleaseDate()}"
+            >Release Date</span
+          >
+        </p>
+        <p class="text">
+          Age Rating:
+          <span class="text-bold" th:text="${movie.getAgeRating()}"
+            >Age Rating</span
+          >
+        </p>
+        <p class="text">
+          Runtime:
+          <span class="text-bold" th:text="${movie.getRuntime()}">Runtime</span>
+          minutes
+        </p>
+        <ul class="text movie-info__genres">
+          Genres:
+          <li
+            class="text-bold movie-info__genre"
+            th:each="genre : ${movie.getGenres()}"
+            th:text="${genre}"
+          >
+            Genre
+          </li>
+        </ul>
+      </section>
+
+      <section class="movie-reviews">
+        <div
+          class="review"
+          th:if="${reviews.size() > 0}"
+          th:each="review : ${reviews}"
+        >
+          <p
+            class="text review__rating"
+            th:text="${review.getRating()} + '/10'"
+          ></p>
+          <p class="text review__content" th:text="${review.getContent()}"></p>
+        </div>
+        <a
+          class="text review__link"
+          th:href="@{/review/{id}(id=${movie.getId()})}"
+          >What do you think?</a
+        >
+      </section>
+
+      <section></section>
+    </main>
+  </body>
+</html>

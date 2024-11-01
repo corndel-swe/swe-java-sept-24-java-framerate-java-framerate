@@ -27,6 +27,7 @@ public class D2E1 {
         ctx -> {
           // TODO: Render 'd2e1.html'
           // TODO: Open d2e1.html and follow the instructions
+            ctx.render("d2e1.html");
         });
 
     return app;
