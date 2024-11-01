@@ -1,9 +1,28 @@
-<div class="container">
-    <h1>
-        Hello, world!
-    </h1>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/css/index.css" />
+    <title>Framerate</title>
+  </head>
 
-    <ul>
-        <li th:each="movie : ${movies}" th:text="${movie.title}"></li>
-    </ul>
-</div>
+  <body>
+    <div th:replace="fragments/navbar :: navbar"></div>
+
+    <main class="movies">
+      <h1 class="heading">Framerate</h1>
+
+      <section class="movies__grid">
+        <div class="movie" th:each="movieTile : ${movieTiles}">
+          <a class="movie__link" th:href="@{${movieTile.getId()}}">
+            <img
+              class="movie__img"
+              th:src="@{${movieTile.getImageURL()}}"
+              th:alt="${movieTile.getTitle()}"
+            />
+          </a>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

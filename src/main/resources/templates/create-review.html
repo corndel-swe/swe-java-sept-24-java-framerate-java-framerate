@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="eng">
+  <head>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/css/index.css" />
+    <title th:text="${movie.getTitle() + 'Review'}"></title>
+  </head>
+
+  <body>
+
+    <div th:replace="fragments/navbar :: navbar"></div>
+
+    <main class="review-movie" th:style="'background-image: url(' + ${movie.getImageURL()} + ')'">
+      <section class="review-movie__content">
+        <h1 class="heading" th:text="${movie.getTitle()}"></h1>
+
+        <form
+          class="review-movie__form"
+          th:action="@{/review/{id}(id=${movie.getId()})}"
+          method="post"
+        >
+          <label class="review-movie__label" for="content"
+            >What did you think?</label
+          >
+          <textarea
+            class="review-movie__thoughts"
+            type="text"
+            id="content"
+            name="content"
+            th:value="${review.getContent()}"
+          ></textarea>
+          <label class="review-movie__label" for="rating">Rating 1 - 10</label>
+          <input
+            class="review-movie__rating"
+            type="range"
+            min="1"
+            max="10"
+            name="rating"
+            id="rating"
+            th:value="${review.getRating()}"
+          />
+          <input class="button" type="submit" value="Submit" />
+        </form>
+      </section>
+    </main>
+  </body>
+</html>
