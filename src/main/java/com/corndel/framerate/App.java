@@ -1,6 +1,9 @@
 package com.corndel.framerate;
 
 import com.corndel.framerate.controllers.MovieController;
+import com.corndel.framerate.controllers.ReviewController;
+import com.corndel.framerate.repositories.MovieRepository;
+import com.corndel.framerate.repositories.ReviewRepository;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
@@ -15,9 +18,14 @@ public class App {
     }
 
     public static Javalin createApp() {
+        MovieRepository movieRepository = new MovieRepository();
+        ReviewRepository reviewRepository = new ReviewRepository();
+        MovieController movieController = new MovieController(movieRepository, reviewRepository);
+        ReviewController reviewController = new ReviewController(movieRepository, reviewRepository);
+
         var app = Javalin.create(
                 config -> {
-                    config.staticFiles.add("/public", Location.CLASSPATH);
+                    config.staticFiles.add("src/main/resources/public", Location.EXTERNAL);
 
                     var resolver = new ClassLoaderTemplateResolver();
                     resolver.setPrefix("/templates/");
@@ -34,8 +42,10 @@ public class App {
             ctx.result("Hello, World!");
         });
 
-        app.get("/", MovieController::getAllMovies);
-        app.get("/{movieId}", MovieController::getMovieById);
+        app.get("/", movieController::getAllMovies);
+        app.get("/{movieId}", movieController::getMovieById);
+        app.get("review/{movieId}", reviewController::getReview);
+        app.post("review/{movieId}", reviewController::createReview);
 
         return app;
     }
